@@ -9,16 +9,20 @@ export const receivePhotosAction = payload => ({
   payload,
 });
 
-export const fetchPhotosAction = () => (async (dispatch) => {
+export const fetchPhotosAction = (date = new Date()) => (async (dispatch) => {
   // activate loader
   dispatch(loaderAction(true));
 
   // fetch photo data
-  const photosResponse = await fetch(`${API_URL}&earth_date=2019-7-6`);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const photosResponse = await fetch(`${API_URL}&earth_date=${year}-${month}-${day}`);
   const photosData = await photosResponse.json();
 
-  // if we have data - dispatch the action to send it to the store.
+  // if we have data - prepare UI and dispatch the action to send it to the store.
   if (photosData && photosData) {
+    window.scrollTo(0, 0);
     dispatch(receivePhotosAction(photosData));
   }
 

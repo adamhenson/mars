@@ -17,6 +17,7 @@
   --font-weight-medium: 500;
   --font-weight-small: 200;
   --gutter-extra-small: 3px;
+  --gutter-extra-large: 4rem;
   --gutter-large: 1.5rem;
   --gutter-medium: 1rem;
   --gutter-small: 0.5rem;
@@ -66,13 +67,14 @@ h6 {
 }
 
 .app {
-  padding: var(--gutter-medium);
+  padding: var(--gutter-medium) var(--gutter-medium) var(--gutter-extra-large);
 }
 
 .app__buttonFilter {
   position: fixed;
   bottom: var(--gutter-medium);
-  right: var(--gutter-medium);
+  right: -3px;
+  z-index: 1;
 }
 
 /* overrides */

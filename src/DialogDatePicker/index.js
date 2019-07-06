@@ -1,1 +1,1 @@
-export { default } from './DialogDatePicker';
+export { default } from './DialogDatePickerContainer';

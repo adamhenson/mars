@@ -21,6 +21,7 @@ const Grid = ({
           alt="no results"
           src={NO_RESULTS_IMAGE}
         />
+        <p>( no photos for this day )</p>
       </div>
     );
   }
