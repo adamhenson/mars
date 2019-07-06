@@ -1,6 +1,6 @@
 .logo {
   display: block;
-  background-image: url(./logo.png);
+  background-image: url('https://hensonism.s3-us-west-2.amazonaws.com/code/mars-logo.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 40px;

@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
 import ScrollContext from '../ScrollContext';
-import noResultsImage from './2001-space-odyssey.jpg';
 import './Grid.css';
+
+const NO_RESULTS_IMAGE = 'https://hensonism.s3-us-west-2.amazonaws.com/code/2001-space-odyssey.jpg';
 
 const Grid = ({
   photos,
@@ -18,7 +19,7 @@ const Grid = ({
       <div className="noResults">
         <LazyOffscreenImage
           className="noResults__image"
-          imageUrl={noResultsImage}
+          imageUrl={NO_RESULTS_IMAGE}
           ScrollContext={ScrollContext}
         />
         <p>no photos for this day</p>
