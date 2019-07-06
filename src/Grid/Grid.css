@@ -63,3 +63,10 @@
     flex-basis: 50%;
   }
 }
+
+/* larger tablets / desktop */
+@media screen and (min-width: 800px) {
+  .noResults__image {
+    height: 460px;
+  }
+}
