@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
 import ScrollContext from '../ScrollContext';
+import noResultsImage from './2001-space-odyssey.jpg';
 import './Grid.css';
-
-const NO_RESULTS_IMAGE = 'https://media.giphy.com/media/TK3jGP2q4np5003zyt/giphy.gif';
 
 const Grid = ({
   photos,
@@ -17,11 +16,12 @@ const Grid = ({
   if (!photos.data.length) {
     return (
       <div className="noResults">
-        <img
-          alt="no results"
-          src={NO_RESULTS_IMAGE}
+        <LazyOffscreenImage
+          className="noResults__image"
+          imageUrl={noResultsImage}
+          ScrollContext={ScrollContext}
         />
-        <p>( no photos for this day )</p>
+        <p>no photos for this day</p>
       </div>
     );
   }

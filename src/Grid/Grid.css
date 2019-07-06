@@ -44,12 +44,10 @@
   background: #000;
 }
 
-.noResults img {
+.noResults__image {
   width: 100%;
-  max-width: 480px;
-  height: auto;
-  margin: 0 auto;
-  display: block;
+  height: 300px;
+  max-height: 100%;
 }
 
 .noResults p {
