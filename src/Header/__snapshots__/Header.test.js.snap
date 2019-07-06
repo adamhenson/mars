@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="logo header__logo"
+  />
+  <h1
+    className="headerText"
+  >
+    Mars Rover
+  </h1>
+</header>
+`;
