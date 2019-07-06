@@ -27,9 +27,9 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "dev": "PORT=8080 REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm react-scripts start",
+    "dev": "PORT=8080 REACT_APP_API_KEY=DEMO_KEY react-scripts start",
     "build": "react-scripts build",
-    "start": "REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm npm run build && serve -s build",
+    "start": "REACT_APP_API_KEY=DEMO_KEY npm run build && serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
