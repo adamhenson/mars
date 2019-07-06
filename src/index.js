@@ -1,0 +1,16 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import configureStore from './store';
+
+ReactDOM.render(
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
+
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.register();

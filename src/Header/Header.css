@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+}
+
+.logo {
+  flex-basis: 40px;
+}
+
+.headerText {
+  flex-basis: calc(100% - 40px);
+  margin: 0;
+  text-align: right;
+}
+
+.header__progress {
+  margin: var(--gutter-medium) 0;
+}
+
+.mdc-linear-progress {
+  background: var(--color-grey);
+}
+
+.mdc-linear-progress__bar-inner {
+  background: var(--mdc-theme-secondary);
+}

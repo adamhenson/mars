@@ -1,0 +1,54 @@
+.loader {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -20px;
+  display: none;
+}
+
+.loader.loader--active {
+  display: block;
+}
+
+/* https://loading.io/css/ */
+.loader__inner {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.loader__inner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 2px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: loader__inner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--color-primary) transparent transparent transparent;
+}
+
+.loader__inner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loader__inner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loader__inner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes loader__inner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
