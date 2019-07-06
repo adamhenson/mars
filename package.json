@@ -23,11 +23,13 @@
     "react-transition-group": "^4.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.0.2",
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "PORT=8080 REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm react-scripts start",
+    "dev": "PORT=8080 REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm react-scripts start",
     "build": "react-scripts build",
+    "start": "REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm npm run build && serve -s build -l 80",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
