@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "PORT=8080 REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm react-scripts start",
     "build": "react-scripts build",
-    "start": "REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm npm run build && serve -s build -l 80",
+    "start": "REACT_APP_API_KEY=NtnhDCv90HCSBo5WLIFP0sDQh0YnXkJJsST02wFm npm run build && serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
