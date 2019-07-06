@@ -69,6 +69,12 @@ h6 {
   padding: var(--gutter-medium);
 }
 
+.app__buttonFilter {
+  position: fixed;
+  bottom: var(--gutter-medium);
+  right: var(--gutter-medium);
+}
+
 /* overrides */
 .app .mdc-text-field--outlined .mdc-floating-label {
   background: var(--color-white);

@@ -17,7 +17,10 @@ const Grid = ({
   if (!photos.data.length) {
     return (
       <div className="noResults">
-        <img src={NO_RESULTS_IMAGE} />
+        <img
+          alt="no results"
+          src={NO_RESULTS_IMAGE}
+        />
       </div>
     );
   }
