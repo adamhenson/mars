@@ -1,6 +1,6 @@
 # `mars-rover`
 
-> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos).
+> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos).<br/><br/><br/><br/><br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -33,7 +33,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `REACT_APP_API_KEY=DEMO_KEY npm run start`
 
-Builds and runs the app for production. `DEMO_KEY` will work, but could eventually reach the API limit. We aren't handling this in a user-friendly way, so the result on page request is just a blank page. In the circleci deploy workflow - we set this key with one provided by applying in [`api.nasa.gov`](https://api.nasa.gov/index.html#apply-for-an-api-key).
+Builds and runs the app for production. `DEMO_KEY` will work, but could eventually reach the API limit. We aren't handling this in a user-friendly way, so the result on page request is just a blank page. In Heroku - we set this key as an environment variable as the one provided by applying in [`api.nasa.gov`](https://api.nasa.gov/index.html#apply-for-an-api-key).
 
 ### `npm run eject`
 
