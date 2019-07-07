@@ -1,6 +1,8 @@
 # `mars-rover`
 
-> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos).<br/><br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br/><br/><br/>
+> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos). A Mars rover is a motor vehicle that travels across the surface of the planet Mars upon arrival. Rovers have several advantages over stationary landers: they examine more territory, they can be directed to interesting features, they can place themselves in sunny positions to weather winter months, and they can advance the knowledge of how to perform very remote robotic vehicle control.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
