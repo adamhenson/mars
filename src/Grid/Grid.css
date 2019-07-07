@@ -42,12 +42,14 @@
 .noResults {
   width: 100%;
   background: #000;
+  border-radius: var(--border-radius);
 }
 
 .noResults__image {
   width: 100%;
   height: 300px;
   max-height: 100%;
+  border-radius: var(--border-radius);
 }
 
 .noResults p {
@@ -68,5 +70,9 @@
 @media screen and (min-width: 800px) {
   .noResults__image {
     height: 460px;
+  }
+
+  .grid__cell {
+    flex-basis: 33.333333333%;
   }
 }

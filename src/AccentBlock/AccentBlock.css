@@ -1,7 +1,0 @@
-.accentBlock {
-  font-family: var(--font-poppins);
-  font-size: var(--font-size-medium);
-  margin-bottom: var(--gutter-large);
-  border-left: 5px var(--color-primary) solid;
-  padding: 0 0 0 var(--gutter-medium);
-}

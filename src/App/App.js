@@ -5,7 +5,7 @@ import Button from '@material/react-button';
 import MaterialIcon from '@material/react-material-icon';
 import '@material/react-button/dist/button.css';
 import '@material/react-material-icon/dist/material-icon.css';
-import AccentBlock from '../AccentBlock';
+import Tout from '../Tout';
 import DialogDatePicker from '../DialogDatePicker';
 import Grid from '../Grid';
 import Header from '../Header';
@@ -26,9 +26,14 @@ const App = ({ isLoading }) => {
     >
       <div className="app">
         <Header />
-        <AccentBlock>
-          A Mars rover is a motor vehicle that travels across the surface of the planet Mars upon arrival. Rovers have several advantages over stationary landers: they examine more territory, they can be directed to interesting features, they can place themselves in sunny positions to weather winter months, and they can advance the knowledge of how to perform very remote robotic vehicle control.
-        </AccentBlock>
+        <Tout
+          altText="Mars Rover"
+          imageUrl="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg"
+        >
+          <p>
+            A Mars rover is a motor vehicle that travels across the surface of the planet Mars upon arrival. Rovers have several advantages over stationary landers: they examine more territory, they can be directed to interesting features, they can place themselves in sunny positions to weather winter months, and they can advance the knowledge of how to perform very remote robotic vehicle control.
+          </p>
+        </Tout>
         <Button
           className="app__buttonFilter"
           onClick={toggleDialog}

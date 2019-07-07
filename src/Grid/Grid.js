@@ -14,15 +14,16 @@ const Grid = ({
   // we are imitating `componentDidMount` lifecycle method.
   useEffect(() => { fetchPhotosAction() }, []);
 
+  // if no photos show alternative content
   if (!photos.data.length) {
     return (
       <div className="noResults">
+        <p>no photos for this day</p>
         <LazyOffscreenImage
           className="noResults__image"
           imageUrl={NO_RESULTS_IMAGE}
           ScrollContext={ScrollContext}
         />
-        <p>no photos for this day</p>
       </div>
     );
   }
