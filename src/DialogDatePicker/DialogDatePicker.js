@@ -44,7 +44,12 @@ const DialogDatePicker = ({ fetchPhotosAction, isOpen, toggle }) => {
               showTodayHelper: false,
             }}
             height={CALENDAR_HEIGHT}
-            onSelect={setSelectedDate}
+            onSelect={(date) => {
+              if (date !== selectedDate) {
+                toggle();
+                setSelectedDate(date);
+              }
+            }}
           />
         }
       </DialogContent>

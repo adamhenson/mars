@@ -52,11 +52,8 @@
   border-radius: var(--border-radius);
 }
 
-.noResults p {
-  color: var(--color-white);
-  font-family: var(--font-poppins);
-  padding: var(--gutter-small);
-  text-align: center;
+.noResults__snackbar .mdc-snackbar__action {
+  color: var(--color-primary) !important;
 }
 
 /* tablets and large phones */
