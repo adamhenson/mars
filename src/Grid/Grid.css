@@ -36,7 +36,7 @@
   padding-top: var(--aspect-ratio-percent);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain !important;
 }
 
 .noResults {
