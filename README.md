@@ -1,8 +1,6 @@
 # `mars-rover`
 
-> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos).<br/><br/><br/><br/><br/>
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> <img src="https://s3.us-west-2.amazonaws.com/hensonism/code/rover.jpg" width="110" height="128.33333333" align="left" /> A single page app of showing Mars Rover photos retrieved from [`api.nasa.gov`](https://api.nasa.gov/api.html#MarsPhotos).<br/><br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br/><br/><br/>
 
 ## Available Scripts
 
