@@ -17,13 +17,17 @@ export const fetchPhotosAction = (date = new Date()) => (async (dispatch) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-  const photosResponse = await fetch(`${API_URL}&earth_date=${year}-${month}-${day}`);
+  const earthDate = `${year}-${month}-${day}`;
+  const photosResponse = await fetch(`${API_URL}&earth_date=${earthDate}`);
   const photosData = await photosResponse.json();
 
   // if we have data - prepare UI and dispatch the action to send it to the store.
-  if (photosData && photosData) {
+  if (photosData && photosData.photos) {
     window.scrollTo(0, 0);
-    dispatch(receivePhotosAction(photosData));
+    dispatch(receivePhotosAction({
+      ...photosData,
+      date: earthDate,
+    }));
   }
 
   // deactivate loader
