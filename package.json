@@ -2,6 +2,13 @@
   "name": "mars-rover",
   "version": "0.1.1",
   "private": true,
+  "keywords": [
+    "react",
+    "redux",
+    "hooks",
+    "mars"
+  ],
+  "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "dependencies": {
     "@foo-software/react-lazy-offscreen-image": "0.0.17",
     "@foo-software/react-scroll-context": "0.0.18",
