@@ -6,7 +6,8 @@
     "react",
     "redux",
     "hooks",
-    "mars"
+    "mars",
+    "rover"
   ],
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "dependencies": {
