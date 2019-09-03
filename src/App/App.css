@@ -2,6 +2,7 @@
   --animation-speed: 200ms;
   --aspect-ratio-percent: 100%;
   --border-radius: 0.3rem;
+  --color-blue: #08448c;
   --color-primary: #ffda34;
   --color-primary-dark: #ff7509;
   --color-grey: #f2f4f4;
@@ -77,6 +78,13 @@ h6 {
   bottom: var(--gutter-medium);
   right: -3px;
   z-index: 10;
+}
+
+.app__searchInput {
+  width: 100%;
+  margin-bottom: 1rem;
+  --mdc-theme-primary: var(--color-blue);
+  --color-secondary: var(--color-primary-dark);
 }
 
 /* overrides */
