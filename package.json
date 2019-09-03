@@ -19,15 +19,15 @@
     "@material/react-snackbar": "^0.14.1",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-infinite-calendar": "^2.3.1",
-    "react-redux": "^7.1.0",
+    "react-redux": "^7.1.1",
     "react-scripts": "2.1.8",
-    "redux": "^4.0.1",
+    "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "serve": "^11.0.2",
-    "uuid": "^3.3.2"
+    "serve": "^11.1.0",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "clean": "rimraf build",
@@ -47,7 +47,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-test-renderer": "^16.8.6",
-    "rimraf": "^2.6.3"
+    "react-test-renderer": "^16.9.0",
+    "rimraf": "^2.7.1"
   }
 }
