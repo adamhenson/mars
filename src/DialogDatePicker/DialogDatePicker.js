@@ -17,7 +17,7 @@ const DialogDatePicker = ({ fetchPhotosAction, isOpen, toggle }) => {
     if (isOpen) {
       toggle();
     }
-  }
+  };
 
   // when the selected date has changed, fetch photos based on the new date.
   useEffect(() => {
@@ -33,25 +33,22 @@ const DialogDatePicker = ({ fetchPhotosAction, isOpen, toggle }) => {
   }, [isOpen]);
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={onDialogClose}
-    >
+    <Dialog open={isOpen} onClose={onDialogClose}>
       <DialogContent>
-        {isCalendarVisible &&
+        {isCalendarVisible && (
           <InfiniteCalendar
             displayOptions={{
-              showTodayHelper: false,
+              showTodayHelper: false
             }}
             height={CALENDAR_HEIGHT}
-            onSelect={(date) => {
+            onSelect={date => {
               if (date !== selectedDate) {
                 toggle();
                 setSelectedDate(date);
               }
             }}
           />
-        }
+        )}
       </DialogContent>
     </Dialog>
   );
@@ -60,7 +57,7 @@ const DialogDatePicker = ({ fetchPhotosAction, isOpen, toggle }) => {
 DialogDatePicker.propTypes = {
   fetchPhotosAction: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 export default DialogDatePicker;

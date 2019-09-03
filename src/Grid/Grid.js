@@ -11,24 +11,21 @@ import './Grid.css';
 const SNACKBAR_TIMEOUT = 5000;
 const CAMERA_NAME_MIN_CHARACTERS = 4;
 
-const getPhotosFromCamera = ({ cameraName, photos }) => photos.filter(photo => (
-  get(photo, 'camera.name') === cameraName
-));
+const getPhotosFromCamera = ({ cameraName, photos }) =>
+  photos.filter(photo => get(photo, 'camera.name') === cameraName);
 
 // experiment
 let timesRendered = 0;
 
-const Grid = ({
-  cameraName,
-  fetchPhotosAction,
-  photos,
-}) => {
+const Grid = ({ cameraName, fetchPhotosAction, photos }) => {
   // experiment - track times rendered
   timesRendered++;
 
   // by passing an empty array as the second argument of the `useEffect` hook
   // we are imitating `componentDidMount` lifecycle method.
-  useEffect(() => { fetchPhotosAction() }, []);
+  useEffect(() => {
+    fetchPhotosAction();
+  }, []);
 
   // if we have data - we don't render a snackbar component... otherwise
   // populate it in the block below.
@@ -62,28 +59,21 @@ const Grid = ({
 
   return (
     <Fragment>
-      <div className="grid__timesRendered">
-        Rendered {timesRendered} times
-      </div>
+      <div className="grid__timesRendered">Rendered {timesRendered} times</div>
       <div className="grid">
         {gridPhotos.map(photo => (
-          <div
-            key={photo.id}
-            className="grid__cell"
-          >
-            <figure
-              className="grid__figure"
-            >
+          <div key={photo.id} className="grid__cell">
+            <figure className="grid__figure">
               <LazyOffscreenImage
                 className="grid__image"
                 imageUrl={photo.img_src}
                 ScrollContext={ScrollContext}
               />
-              {photo.camera && photo.camera.full_name &&
+              {photo.camera && photo.camera.full_name && (
                 <figcaption>
                   <p>{photo.camera.full_name}</p>
                 </figcaption>
-              }
+              )}
             </figure>
           </div>
         ))}
@@ -96,21 +86,25 @@ const Grid = ({
 Grid.propTypes = {
   fetchPhotosAction: PropTypes.func.isRequired,
   photos: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      img_src: PropTypes.string,
-      rover: PropTypes.shape({
-        name: PropTypes.string,
-        status: PropTypes.string,
-      }),
-    })),
-  }),
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        img_src: PropTypes.string,
+        rover: PropTypes.shape({
+          name: PropTypes.string,
+          status: PropTypes.string
+        })
+      })
+    )
+  })
 };
 
 function areEqual(prevProps, nextProps) {
-  return (prevProps.photos.date === nextProps.photos.date
-    && (prevProps.cameraName === nextProps.cameraName
-    || nextProps.cameraName.length <= CAMERA_NAME_MIN_CHARACTERS));
+  return (
+    prevProps.photos.date === nextProps.photos.date &&
+    (prevProps.cameraName === nextProps.cameraName ||
+      nextProps.cameraName.length <= CAMERA_NAME_MIN_CHARACTERS)
+  );
 }
 
 export default React.memo(Grid, areEqual);

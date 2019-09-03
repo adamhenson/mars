@@ -25,9 +25,7 @@ const App = ({ isLoading }) => {
   };
 
   return (
-    <ScrollProvider
-      Context={ScrollContext}
-    >
+    <ScrollProvider Context={ScrollContext}>
       <div className="app">
         <Header />
         <Tout
@@ -54,29 +52,21 @@ const App = ({ isLoading }) => {
         <Button
           className="app__buttonFilter"
           onClick={toggleDialog}
-          icon={(
-            <MaterialIcon icon="date_range" />
-          )}
+          icon={<MaterialIcon icon="date_range" />}
           unelevated
         >
           Filter
         </Button>
         <Grid cameraName={cameraName} />
-        <DialogDatePicker
-          isOpen={isDialogOpen}
-          toggle={toggleDialog}
-        />
-        <Loader
-          isActive={isLoading}
-        />
+        <DialogDatePicker isOpen={isDialogOpen} toggle={toggleDialog} />
+        <Loader isActive={isLoading} />
       </div>
     </ScrollProvider>
   );
 };
 
 App.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default App;
-

@@ -4,5 +4,5 @@ import photos from './photosReducer';
 
 export default combineReducers({
   loader,
-  photos,
+  photos
 });

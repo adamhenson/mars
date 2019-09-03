@@ -3,7 +3,10 @@ import DialogDatePicker from './DialogDatePicker';
 import { fetchPhotosAction } from '../actions/photosAction';
 
 const mapDispatchToProps = dispatch => ({
-  fetchPhotosAction: payload => dispatch(fetchPhotosAction(payload)),
+  fetchPhotosAction: payload => dispatch(fetchPhotosAction(payload))
 });
 
-export default connect(null, mapDispatchToProps)(DialogDatePicker);
+export default connect(
+  null,
+  mapDispatchToProps
+)(DialogDatePicker);

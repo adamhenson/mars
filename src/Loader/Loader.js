@@ -6,7 +6,7 @@ import './Loader.css';
 const Loader = ({ isActive }) => (
   <div
     className={classnames('loader', {
-      'loader--active': isActive,
+      'loader--active': isActive
     })}
   >
     <div className="loader__inner">
@@ -19,7 +19,7 @@ const Loader = ({ isActive }) => (
 );
 
 Loader.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired
 };
 
 export default Loader;

@@ -1,12 +1,12 @@
 const defaultState = {
-  isActive: false,
+  isActive: false
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case 'LOADER_ACTIVE':
       return {
-        isActive: action.payload,
+        isActive: action.payload
       };
     default:
       return state;
