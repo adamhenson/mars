@@ -14,12 +14,18 @@ const getPhotosFromCamera = ({ cameraName, photos }) => photos.filter(photo => (
   get(photo, 'camera.name') === cameraName
 ));
 
+// experiment
+let timesRendered = 0;
+
 const Grid = ({
   cameraName,
   fetchPhotosAction,
   photos,
   shouldSearch,
 }) => {
+  // experiment - track times rendered
+  timesRendered++;
+
   // by passing an empty array as the second argument of the `useEffect` hook
   // we are imitating `componentDidMount` lifecycle method.
   useEffect(() => { fetchPhotosAction() }, []);
@@ -51,6 +57,9 @@ const Grid = ({
 
   return (
     <Fragment>
+      <div className="grid__timesRendered">
+        Rendered {timesRendered} times
+      </div>
       <div className="grid">
         {gridPhotos.map(photo => (
           <div
