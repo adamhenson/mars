@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ScrollProvider } from '@foo-software/react-scroll-context';
 import Button from '@material/react-button';
 import MaterialIcon from '@material/react-material-icon';
-import TextField, { Input } from '@material/react-text-field';
+import TextField, { HelperText, Input } from '@material/react-text-field';
 import '@material/react-button/dist/button.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import '@material/react-text-field/dist/text-field.min.css';
@@ -19,7 +19,6 @@ import './App.css';
 const App = ({ isLoading }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [cameraName, setCameraName] = useState('');
-  const [shouldSearch, setShouldSearch] = useState(false);
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -40,19 +39,12 @@ const App = ({ isLoading }) => {
         <TextField
           className="app__searchInput"
           label="Camera Name"
-          onTrailingIconSelect={() => setShouldSearch(true)}
-          trailingIcon={<MaterialIcon role="button" icon="search" />}
+          helperText={<HelperText>at least 4 characters</HelperText>}
+          trailingIcon={<MaterialIcon icon="search" />}
         >
           <Input
             value={cameraName}
-            onChange={event => {
-              setCameraName(event.currentTarget.value);
-
-              // if we've updated the search value - reset
-              if (shouldSearch) {
-                setShouldSearch(false);
-              }
-            }}
+            onChange={event => setCameraName(event.currentTarget.value)}
             spellCheck="false"
             type="text"
             id="cameraNameInput"
@@ -69,10 +61,7 @@ const App = ({ isLoading }) => {
         >
           Filter
         </Button>
-        <Grid
-          cameraName={cameraName}
-          shouldSearch={shouldSearch}
-        />
+        <Grid cameraName={cameraName} />
         <DialogDatePicker
           isOpen={isDialogOpen}
           toggle={toggleDialog}

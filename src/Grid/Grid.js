@@ -21,7 +21,6 @@ const Grid = ({
   cameraName,
   fetchPhotosAction,
   photos,
-  shouldSearch,
 }) => {
   // experiment - track times rendered
   timesRendered++;
@@ -51,7 +50,7 @@ const Grid = ({
   }
 
   // if we don't need to filter show the full grid... else filtered.
-  const gridPhotos = !shouldSearch || !cameraName
+  const gridPhotos = !cameraName
     ? photos.data
     : getPhotosFromCamera({ cameraName, photos: photos.data });
 
