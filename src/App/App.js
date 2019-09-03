@@ -45,7 +45,14 @@ const App = ({ isLoading }) => {
         >
           <Input
             value={cameraName}
-            onChange={event => setCameraName(event.currentTarget.value)}
+            onChange={event => {
+              setCameraName(event.currentTarget.value);
+
+              // if we've updated the search value - reset
+              if (shouldSearch) {
+                setShouldSearch(false);
+              }
+            }}
             spellCheck="false"
             type="text"
             id="cameraNameInput"

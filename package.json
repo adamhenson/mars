@@ -19,6 +19,7 @@
     "@material/react-snackbar": "^0.14.1",
     "@material/react-text-field": "^0.15.0",
     "classnames": "^2.2.6",
+    "lodash.get": "^4.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

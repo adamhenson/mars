@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash.get';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
 import { Snackbar } from '@material/react-snackbar';
 import '@material/react-snackbar/dist/snackbar.css';
@@ -8,6 +9,10 @@ import ScrollContext from '../ScrollContext';
 import './Grid.css';
 
 const SNACKBAR_TIMEOUT = 5000;
+
+const getPhotosFromCamera = ({ cameraName, photos }) => photos.filter(photo => (
+  get(photo, 'camera.name') === cameraName
+));
 
 const Grid = ({
   cameraName,
@@ -39,10 +44,15 @@ const Grid = ({
     photos.data = alternatePhotos;
   }
 
+  // if we don't need to filter show the full grid... else filtered.
+  const gridPhotos = !shouldSearch || !cameraName
+    ? photos.data
+    : getPhotosFromCamera({ cameraName, photos: photos.data });
+
   return (
     <Fragment>
       <div className="grid">
-        {photos.data.map(photo => (
+        {gridPhotos.map(photo => (
           <div
             key={photo.id}
             className="grid__cell"
@@ -73,7 +83,7 @@ Grid.propTypes = {
   fetchPhotosAction: PropTypes.func.isRequired,
   photos: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       img_src: PropTypes.string,
       rover: PropTypes.shape({
         name: PropTypes.string,
