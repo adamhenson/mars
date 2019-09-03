@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
@@ -9,13 +9,15 @@ import ScrollContext from '../ScrollContext';
 import './Grid.css';
 
 const SNACKBAR_TIMEOUT = 5000;
-const CAMERA_NAME_MIN_CHARACTERS = 4;
-
-const getPhotosByCameraName = ({ cameraName, photos }) =>
-  photos.filter(photo => get(photo, 'camera.name') === cameraName);
 
 // experiment
 let timesRendered = 0;
+let timesBigFunctionCalled = 0;
+
+const getPhotosByCameraName = ({ cameraName, photos }) => {
+  timesBigFunctionCalled++;
+  return photos.filter(photo => get(photo, 'camera.name') === cameraName);
+};
 
 const Grid = ({ cameraName, photos }) => {
   // experiment - track times rendered
@@ -44,7 +46,14 @@ const Grid = ({ cameraName, photos }) => {
   // if we don't need to filter show the full grid... else filtered.
   let gridPhotos = !cameraName
     ? photos.data
-    : getPhotosByCameraName({ cameraName, photos: photos.data });
+    : useMemo(
+        () =>
+          getPhotosByCameraName({
+            cameraName,
+            photos: photos.data
+          }),
+        [cameraName, photos.date]
+      );
 
   // if we've filtered and have no results - show all
   if (!gridPhotos.length && photos.data.length) {
@@ -53,7 +62,10 @@ const Grid = ({ cameraName, photos }) => {
 
   return (
     <Fragment>
-      <h2>Rendered {timesRendered} Times</h2>
+      <h2>
+        Rendered {timesRendered} times, big function called{' '}
+        {timesBigFunctionCalled} times
+      </h2>
       <div className="grid">
         {gridPhotos.map(photo => (
           <div key={photo.id} className="grid__cell">
@@ -95,8 +107,7 @@ Grid.propTypes = {
 function areEqual(prevProps, nextProps) {
   return (
     prevProps.photos.date === nextProps.photos.date &&
-    (prevProps.cameraName === nextProps.cameraName ||
-      nextProps.cameraName.length <= CAMERA_NAME_MIN_CHARACTERS)
+    prevProps.cameraName === nextProps.cameraName
   );
 }
 
