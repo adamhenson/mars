@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
@@ -11,21 +11,15 @@ import './Grid.css';
 const SNACKBAR_TIMEOUT = 5000;
 const CAMERA_NAME_MIN_CHARACTERS = 4;
 
-const getPhotosFromCamera = ({ cameraName, photos }) =>
+const getPhotosByCameraName = ({ cameraName, photos }) =>
   photos.filter(photo => get(photo, 'camera.name') === cameraName);
 
 // experiment
 let timesRendered = 0;
 
-const Grid = ({ cameraName, fetchPhotosAction, photos }) => {
+const Grid = ({ cameraName, photos }) => {
   // experiment - track times rendered
   timesRendered++;
-
-  // by passing an empty array as the second argument of the `useEffect` hook
-  // we are imitating `componentDidMount` lifecycle method.
-  useEffect(() => {
-    fetchPhotosAction();
-  }, []);
 
   // if we have data - we don't render a snackbar component... otherwise
   // populate it in the block below.
@@ -50,7 +44,7 @@ const Grid = ({ cameraName, fetchPhotosAction, photos }) => {
   // if we don't need to filter show the full grid... else filtered.
   let gridPhotos = !cameraName
     ? photos.data
-    : getPhotosFromCamera({ cameraName, photos: photos.data });
+    : getPhotosByCameraName({ cameraName, photos: photos.data });
 
   // if we've filtered and have no results - show all
   if (!gridPhotos.length && photos.data.length) {
@@ -59,7 +53,7 @@ const Grid = ({ cameraName, fetchPhotosAction, photos }) => {
 
   return (
     <Fragment>
-      <div className="grid__timesRendered">Rendered {timesRendered} times</div>
+      <h2>Rendered {timesRendered} Times</h2>
       <div className="grid">
         {gridPhotos.map(photo => (
           <div key={photo.id} className="grid__cell">
@@ -84,7 +78,6 @@ const Grid = ({ cameraName, fetchPhotosAction, photos }) => {
 };
 
 Grid.propTypes = {
-  fetchPhotosAction: PropTypes.func.isRequired,
   photos: PropTypes.shape({
     data: PropTypes.arrayOf(
       PropTypes.shape({

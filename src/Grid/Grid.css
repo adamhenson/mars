@@ -56,12 +56,6 @@
   color: var(--color-primary) !important;
 }
 
-.grid__timesRendered {
-  position: fixed;
-  top: 25px;
-  left: 70px;
-}
-
 /* tablets and large phones */
 @media screen and (min-width: 500px) {
   .grid__cell {

@@ -87,6 +87,18 @@ h6 {
   --color-secondary: var(--color-primary-dark);
 }
 
+.app__headline {
+  display: flex;
+}
+
+.app__headline > h1 {
+  flex-basis: 60%;
+}
+
+.app__headline > div {
+  flex-basis: 40%;
+}
+
 /* overrides */
 .app .mdc-text-field--outlined .mdc-floating-label {
   background: var(--color-white);
