@@ -50,7 +50,7 @@ const Grid = ({
   }
 
   // if we don't need to filter show the full grid... else filtered.
-  const gridPhotos = !cameraName
+  let gridPhotos = !cameraName
     ? photos.data
     : getPhotosFromCamera({ cameraName, photos: photos.data });
 
