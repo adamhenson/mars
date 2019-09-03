@@ -10,8 +10,10 @@ import './Grid.css';
 const SNACKBAR_TIMEOUT = 5000;
 
 const Grid = ({
-  photos,
+  cameraName,
   fetchPhotosAction,
+  photos,
+  shouldSearch,
 }) => {
   // by passing an empty array as the second argument of the `useEffect` hook
   // we are imitating `componentDidMount` lifecycle method.
@@ -71,7 +73,7 @@ Grid.propTypes = {
   fetchPhotosAction: PropTypes.func.isRequired,
   photos: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       img_src: PropTypes.string,
       rover: PropTypes.shape({
         name: PropTypes.string,

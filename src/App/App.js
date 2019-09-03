@@ -19,6 +19,7 @@ import './App.css';
 const App = ({ isLoading }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [cameraName, setCameraName] = useState('');
+  const [shouldSearch, setShouldSearch] = useState(false);
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -39,7 +40,8 @@ const App = ({ isLoading }) => {
         <TextField
           className="app__searchInput"
           label="Camera Name"
-          leadingIcon={<MaterialIcon icon="search" />}
+          onTrailingIconSelect={() => setShouldSearch(true)}
+          trailingIcon={<MaterialIcon role="button" icon="search" />}
         >
           <Input
             value={cameraName}
@@ -60,7 +62,10 @@ const App = ({ isLoading }) => {
         >
           Filter
         </Button>
-        <Grid />
+        <Grid
+          cameraName={cameraName}
+          shouldSearch={shouldSearch}
+        />
         <DialogDatePicker
           isOpen={isDialogOpen}
           toggle={toggleDialog}
