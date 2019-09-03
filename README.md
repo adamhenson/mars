@@ -13,6 +13,8 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+`REACT_APP_API_KEY` is an API key as explained in [api.nasa.gov docs](https://api.nasa.gov/api.html#authentication) and it's encouraged to request your own to avoid rate limiting.
+
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
