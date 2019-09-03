@@ -9,6 +9,7 @@ import ScrollContext from '../ScrollContext';
 import './Grid.css';
 
 const SNACKBAR_TIMEOUT = 5000;
+const CAMERA_NAME_MIN_CHARACTERS = 4;
 
 const getPhotosFromCamera = ({ cameraName, photos }) => photos.filter(photo => (
   get(photo, 'camera.name') === cameraName
@@ -50,7 +51,7 @@ const Grid = ({
   }
 
   // if we don't need to filter show the full grid... else filtered.
-  const gridPhotos = !cameraName
+  let gridPhotos = !cameraName
     ? photos.data
     : getPhotosFromCamera({ cameraName, photos: photos.data });
 
@@ -101,4 +102,10 @@ Grid.propTypes = {
   }),
 };
 
-export default Grid;
+function areEqual(prevProps, nextProps) {
+  return (prevProps.photos.date === nextProps.photos.date
+    && (prevProps.cameraName === nextProps.cameraName
+    || nextProps.cameraName.length <= CAMERA_NAME_MIN_CHARACTERS));
+}
+
+export default React.memo(Grid, areEqual);
