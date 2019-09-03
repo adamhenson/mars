@@ -54,6 +54,11 @@ const Grid = ({
     ? photos.data
     : getPhotosFromCamera({ cameraName, photos: photos.data });
 
+  // if we've filtered and have no results - show all
+  if (!gridPhotos.length && photos.data.length) {
+    gridPhotos = photos.data;
+  }
+
   return (
     <Fragment>
       <div className="grid__timesRendered">
