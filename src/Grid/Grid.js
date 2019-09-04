@@ -14,9 +14,15 @@ const SNACKBAR_TIMEOUT = 5000;
 let timesRendered = 0;
 let timesBigFunctionCalled = 0;
 
+// filter by full name if it includes the name provided by the
+// user. case-insensitive filtering.
 const getPhotosByCameraName = ({ cameraName, photos }) => {
   timesBigFunctionCalled++;
-  return photos.filter(photo => get(photo, 'camera.name') === cameraName);
+  return photos.filter(photo =>
+    get(photo, 'camera.full_name', '')
+      .toLowerCase()
+      .includes(cameraName.toLowerCase())
+  );
 };
 
 const Grid = ({ cameraName, photos }) => {
