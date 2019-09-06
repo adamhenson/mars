@@ -87,6 +87,11 @@ h6 {
   --color-secondary: var(--color-primary-dark);
 }
 
+.app_radio--max-photos {
+  text-align: right;
+  --mdc-theme-secondary: var(--color-primary-dark);
+}
+
 .app__headline {
   display: flex;
 }

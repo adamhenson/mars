@@ -10,25 +10,19 @@ import './Grid.css';
 
 const SNACKBAR_TIMEOUT = 5000;
 
-// experiment
-let timesRendered = 0;
-let timesBigFunctionCalled = 0;
-
 // filter by full name if it includes the name provided by the
 // user. case-insensitive filtering.
-const getPhotosByCameraName = ({ cameraName, photos }) => {
-  timesBigFunctionCalled++;
-  return photos.filter(photo =>
+const getPhotosByCameraName = ({ cameraName, photos }) =>
+  photos.filter(photo =>
     get(photo, 'camera.full_name', '')
       .toLowerCase()
       .includes(cameraName.toLowerCase())
   );
-};
 
-const Grid = ({ cameraName, photos }) => {
-  // experiment - track times rendered
-  timesRendered++;
+// get a leading subset of an array
+const getLeadingSubset = ({ data, lastIndex }) => data.slice(0, lastIndex);
 
+const Grid = ({ cameraName, maxPhotos, photos }) => {
   // if we have data - we don't render a snackbar component... otherwise
   // populate it in the block below.
   let snackbar = null;
@@ -61,6 +55,19 @@ const Grid = ({ cameraName, photos }) => {
         [cameraName, photos.date]
       );
 
+  // if we a max number of photos to show (not 'all') - let's slice
+  // off a subset of photos.
+  if (typeof maxPhotos === 'number') {
+    gridPhotos = useMemo(
+      () =>
+        getLeadingSubset({
+          lastIndex: maxPhotos,
+          data: gridPhotos
+        }),
+      [maxPhotos, cameraName, photos.date]
+    );
+  }
+
   // if we've filtered and have no results - show all
   if (!gridPhotos.length && photos.data.length) {
     gridPhotos = photos.data;
@@ -68,10 +75,6 @@ const Grid = ({ cameraName, photos }) => {
 
   return (
     <Fragment>
-      <h2>
-        Rendered {timesRendered} times, big function called{' '}
-        {timesBigFunctionCalled} times
-      </h2>
       <div className="grid">
         {gridPhotos.map(photo => (
           <div key={photo.id} className="grid__cell">
@@ -112,8 +115,9 @@ Grid.propTypes = {
 
 function areEqual(prevProps, nextProps) {
   return (
+    prevProps.cameraName === nextProps.cameraName &&
     prevProps.photos.date === nextProps.photos.date &&
-    prevProps.cameraName === nextProps.cameraName
+    prevProps.maxPhotos === nextProps.maxPhotos
   );
 }
 
