@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Profiler, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollProvider } from '@foo-software/react-scroll-context';
 import Button from '@material/react-button';
@@ -15,6 +15,21 @@ import Header from '../Header';
 import Loader from '../Loader';
 import ScrollContext from '../ScrollContext';
 import './App.css';
+
+// profiler callback
+// https://reactjs.org/docs/profiler.html#onrender-callback
+const onRender = (
+  ...[
+    ,
+    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+    actualDuration, // time spent rendering the committed update
+    baseDuration // estimated time to render the entire subtree without memoization
+  ]
+) =>
+  console.log(phase, {
+    actualDuration: Number(actualDuration.toFixed(2)),
+    baseDuration: Number(baseDuration.toFixed(2))
+  });
 
 const App = ({ fetchPhotosAction, isLoading }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -66,7 +81,9 @@ const App = ({ fetchPhotosAction, isLoading }) => {
             </Button>
           </div>
         </div>
-        <Grid cameraName={cameraName} />
+        <Profiler id="Grid" onRender={onRender}>
+          <Grid cameraName={cameraName} />
+        </Profiler>
         <DialogDatePicker isOpen={isDialogOpen} toggle={toggleDialog} />
         <Loader isActive={isLoading} />
       </div>
