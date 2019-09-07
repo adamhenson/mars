@@ -1,9 +1,10 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { Profiler, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
 import { Snackbar } from '@material/react-snackbar';
 import '@material/react-snackbar/dist/snackbar.css';
+import { getProfileData, logProfileData } from '../profiler';
 import alternatePhotos from './alternatePhotos';
 import ScrollContext from '../ScrollContext';
 import './Grid.css';
@@ -21,6 +22,11 @@ const getPhotosByCameraName = ({ cameraName, photos }) =>
 
 // get a leading subset of an array
 const getLeadingSubset = ({ data, lastIndex }) => data.slice(0, lastIndex);
+
+// the current number of renders and a store of render profile data. these values
+// need to be in the global scope vs local state to prevent re-renders on change.
+let renderIndex = 0;
+let renderProfiles = [];
 
 const Grid = ({ cameraName, maxPhotos, photos }) => {
   // if we have data - we don't render a snackbar component... otherwise
@@ -73,8 +79,21 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
     gridPhotos = photos.data;
   }
 
+  // handle render data
+  renderIndex++;
+  logProfileData({
+    name: `render: ${renderIndex}`,
+    data: renderProfiles
+  });
+  renderProfiles = [];
+
   return (
-    <Fragment>
+    <Profiler
+      id="Grid"
+      onRender={(...profileData) => {
+        renderProfiles.push(getProfileData(profileData));
+      }}
+    >
       <div className="grid">
         {gridPhotos.map(photo => (
           <div key={photo.id} className="grid__cell">
@@ -94,7 +113,7 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
         ))}
       </div>
       {snackbar}
-    </Fragment>
+    </Profiler>
   );
 };
 
