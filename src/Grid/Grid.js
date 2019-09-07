@@ -39,10 +39,14 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
   let snackbar = null;
 
   // if we don't need to filter show the full grid... else filtered.
-  let gridPhotos = getPhotosByCameraName({
-    cameraName,
-    photos: photos.data
-  });
+  let gridPhotos = useMemo(
+    () =>
+      getPhotosByCameraName({
+        cameraName,
+        photos: photos.data
+      }),
+    [cameraName, photos.date]
+  );
 
   // if we a max number of photos to show (not 'all') - let's slice
   // off a subset of photos.
