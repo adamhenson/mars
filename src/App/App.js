@@ -27,11 +27,14 @@ const onRender = (
     actualDuration, // time spent rendering the committed update
     baseDuration // estimated time to render the entire subtree without memoization
   ]
-) =>
-  console.log(phase, {
+) => {
+  console.group(phase);
+  console.table({
     actualDuration: Number(actualDuration.toFixed(2)),
     baseDuration: Number(baseDuration.toFixed(2))
   });
+  console.groupEnd();
+};
 
 const App = ({ fetchPhotosAction, isLoading }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
