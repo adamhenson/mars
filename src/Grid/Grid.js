@@ -13,12 +13,17 @@ const SNACKBAR_TIMEOUT = 5000;
 
 // filter by full name if it includes the name provided by the
 // user. case-insensitive filtering.
-const getPhotosByCameraName = ({ cameraName, photos }) =>
-  photos.filter(photo =>
+const getPhotosByCameraName = ({ cameraName, photos }) => {
+  if (!cameraName) {
+    return photos;
+  }
+
+  return photos.filter(photo =>
     get(photo, 'camera.full_name', '')
       .toLowerCase()
       .includes(cameraName.toLowerCase())
   );
+};
 
 // get a leading subset of an array
 const getLeadingSubset = ({ data, lastIndex }) => data.slice(0, lastIndex);
@@ -33,8 +38,28 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
   // populate it in the block below.
   let snackbar = null;
 
+  // if we don't need to filter show the full grid... else filtered.
+  let gridPhotos = getPhotosByCameraName({
+    cameraName,
+    photos: photos.data
+  });
+
+  // if we a max number of photos to show (not 'all') - let's slice
+  // off a subset of photos.
+  if (typeof maxPhotos === 'number') {
+    gridPhotos = getLeadingSubset({
+      lastIndex: maxPhotos,
+      data: gridPhotos
+    });
+  }
+
+  // if we've filtered and have no results - show all
+  if (!gridPhotos.length && photos.data.length) {
+    gridPhotos = photos.data;
+  }
+
   // if no photos show alternate content
-  if (!photos.data.length) {
+  if (!gridPhotos.length) {
     snackbar = (
       <Snackbar
         actionText="dismiss"
@@ -46,37 +71,7 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
     );
 
     // alternate space related imagery
-    photos.data = alternatePhotos;
-  }
-
-  // if we don't need to filter show the full grid... else filtered.
-  let gridPhotos = !cameraName
-    ? photos.data
-    : useMemo(
-        () =>
-          getPhotosByCameraName({
-            cameraName,
-            photos: photos.data
-          }),
-        [cameraName, photos.date]
-      );
-
-  // if we a max number of photos to show (not 'all') - let's slice
-  // off a subset of photos.
-  if (typeof maxPhotos === 'number') {
-    gridPhotos = useMemo(
-      () =>
-        getLeadingSubset({
-          lastIndex: maxPhotos,
-          data: gridPhotos
-        }),
-      [maxPhotos, cameraName, photos.date]
-    );
-  }
-
-  // if we've filtered and have no results - show all
-  if (!gridPhotos.length && photos.data.length) {
-    gridPhotos = photos.data;
+    gridPhotos = alternatePhotos;
   }
 
   // handle render data
