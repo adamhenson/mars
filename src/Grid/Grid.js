@@ -13,7 +13,7 @@ const SNACKBAR_TIMEOUT = 5000;
 
 // filter by full name if it includes the name provided by the
 // user. case-insensitive filtering.
-const getPhotosByCameraName = ({ cameraName, photos }) => {
+const getPhotos = ({ cameraName, photos }) => {
   if (!cameraName) {
     return photos;
   }
@@ -41,7 +41,7 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
   // if we don't need to filter show the full grid... else filtered.
   let gridPhotos = useMemo(
     () =>
-      getPhotosByCameraName({
+      getPhotos({
         cameraName,
         photos: photos.data
       }),
