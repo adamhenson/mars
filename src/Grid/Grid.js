@@ -1,10 +1,9 @@
-import React, { Profiler, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import { LazyOffscreenImage } from '@foo-software/react-lazy-offscreen-image';
 import { Snackbar } from '@material/react-snackbar';
 import '@material/react-snackbar/dist/snackbar.css';
-import { getProfileData, logProfileData } from '../profiler';
 import alternatePhotos from './alternatePhotos';
 import ScrollContext from '../ScrollContext';
 import './Grid.css';
@@ -28,12 +27,11 @@ const getPhotos = ({ cameraName, photos }) => {
 // get a leading subset of an array
 const getLeadingSubset = ({ data, lastIndex }) => data.slice(0, lastIndex);
 
-// the current number of renders and a store of render profile data. these values
-// need to be in the global scope vs local state to prevent re-renders on change.
+// the current number of renders. this value needs to be in the global
+// scope vs local state to prevent re-renders on change.
 let renderIndex = 0;
-let renderProfiles = [];
 
-const Grid = ({ cameraName, maxPhotos, photos }) => {
+const Grid = ({ cameraName, maxPhotos, photos, setRenderProfileName }) => {
   // if we have data - we don't render a snackbar component... otherwise
   // populate it in the block below.
   let snackbar = null;
@@ -79,20 +77,11 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
   }
 
   // handle render data
+  setRenderProfileName(renderIndex);
   renderIndex++;
-  logProfileData({
-    name: `render: ${renderIndex}`,
-    data: renderProfiles
-  });
-  renderProfiles = [];
 
   return (
-    <Profiler
-      id="Grid"
-      onRender={(...profileData) => {
-        renderProfiles.push(getProfileData(profileData));
-      }}
-    >
+    <>
       <div className="grid">
         {gridPhotos.map(photo => (
           <div key={photo.id} className="grid__cell">
@@ -112,12 +101,16 @@ const Grid = ({ cameraName, maxPhotos, photos }) => {
         ))}
       </div>
       {snackbar}
-    </Profiler>
+    </>
   );
 };
 
 Grid.propTypes = {
+  cameraName: PropTypes.string.isRequired,
+  maxPhotos: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   photos: PropTypes.shape({
+    date: PropTypes.string,
     data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -128,7 +121,8 @@ Grid.propTypes = {
         })
       })
     )
-  })
+  }),
+  setRenderProfileName: PropTypes.func.isRequired
 };
 
 function areEqual(prevProps, nextProps) {

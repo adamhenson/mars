@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Profiler, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollProvider } from '@foo-software/react-scroll-context';
 import Button from '@material/react-button';
@@ -10,6 +10,7 @@ import '@material/react-material-icon/dist/material-icon.css';
 import '@material/react-text-field/dist/text-field.min.css';
 import '@material/react-radio/dist/radio.min.css';
 import { homeTout } from '../content';
+import { getProfileData, logProfileData } from '../profiler';
 import Tout from '../Tout';
 import DialogDatePicker from '../DialogDatePicker';
 import Grid from '../Grid';
@@ -18,10 +19,24 @@ import Loader from '../Loader';
 import ScrollContext from '../ScrollContext';
 import './App.css';
 
+// the current number of renders. this value needs to be in the global
+// scope vs local state to prevent re-renders on change.
+let renderProfiles = [];
+
 const App = ({ fetchPhotosAction, isLoading }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [cameraName, setCameraName] = useState('');
   const [maxPhotos, setMaxPhotos] = useState(5);
+
+  const setRenderProfileData = renderIndex => {
+    if (renderProfiles.length) {
+      logProfileData({
+        name: `render: ${renderIndex}`,
+        data: renderProfiles
+      });
+      renderProfiles = [];
+    }
+  };
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -100,7 +115,18 @@ const App = ({ fetchPhotosAction, isLoading }) => {
             </Button>
           </div>
         </div>
-        <Grid maxPhotos={maxPhotos} cameraName={cameraName} />
+        <Profiler
+          id="Grid"
+          onRender={(...profileData) => {
+            renderProfiles.push(getProfileData(profileData));
+          }}
+        >
+          <Grid
+            maxPhotos={maxPhotos}
+            cameraName={cameraName}
+            setRenderProfileName={setRenderProfileData}
+          />
+        </Profiler>
         <DialogDatePicker isOpen={isDialogOpen} toggle={toggleDialog} />
         <Loader isActive={isLoading} />
       </div>
